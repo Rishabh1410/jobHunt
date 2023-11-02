@@ -4,7 +4,7 @@ import Navbar from "../Navbar";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 
-const PostJob = () => {
+const PostJob = ({ userInfo }) => {
   const [Jobid, setJobid] = useState("");
   const [jobTitle, setjobTitle] = useState("");
   const [Des, setDes] = useState("");
@@ -24,29 +24,28 @@ const PostJob = () => {
       Jobid,
       jobTitle,
       Des,
-      Id
     };
-    e.preventDefault();
-    if (Jobid === "") {
-      window.alert("Enter job id");
-    } else if (jobTitle === "") {
-      window.alert("Enter job title");
-    } else if (Des === "") {
-      window.alert("Enter description");
-    } else {
-      let savedItem = [];
-      if (localStorage.getItem("item")) {
-        savedItem = JSON.parse(localStorage.getItem("item"));
-      }
-      localStorage.setItem("item", JSON.stringify([...savedItem, { jobPost }]));
-      window.alert("Form Submitted Successfully");
-      navigate("/Jobs");
-    }
+    // e.preventDefault();
+    // if (Jobid === "") {
+    //   window.alert("Enter job id");
+    // } else if (jobTitle === "") {
+    //   window.alert("Enter job title");
+    // } else if (Des === "") {
+    //   window.alert("Enter description");
+    // } else {
+    //   let savedItem = [];
+    //   if (localStorage.getItem("item")) {
+    //     savedItem = JSON.parse(localStorage.getItem("item"));
+    //   }
+    //   localStorage.setItem("item", JSON.stringify([...savedItem, { jobPost }]));
+    //   window.alert("Form Submitted Successfully");
+    //   navigate("/Jobs");
+    // }
   };
 
   return (
     <div>
-      <Navbar />
+      <Navbar userInfo={userInfo} />
 
       <div className="job-background">
         <div className="title">
@@ -60,19 +59,6 @@ const PostJob = () => {
         <form>
           <div className="form-group">
             <label id="name-label" htmlFor="name">
-              job id
-            </label>
-            <input
-              type="text"
-              name="Jobid"
-              className="form-control"
-              placeholder="Enter jobId"
-              onChange={(e) => setCompany(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label id="name-label" htmlFor="name">
               job title
             </label>
             <input
@@ -80,20 +66,18 @@ const PostJob = () => {
               name="jobTitle"
               className="form-control"
               placeholder="Enter job title"
-              onChange={(e) => setLocation(e.target.value)}
               required
             />
           </div>
           <div className="form-group">
             <label id="name-label" htmlFor="name">
-              job title
+              job description
             </label>
             <input
               type="text"
               name="Des"
               className="form-control"
               placeholder="Enter job description"
-              onChange={(e) => setLocation(e.target.value)}
               required
             />
           </div>

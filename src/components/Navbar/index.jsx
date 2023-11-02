@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./index.css";
 
-const Navbar = () => {
+const Navbar = ({ userInfo }) => {
   return (
     <>
       <div className="main-page">
@@ -13,14 +13,19 @@ const Navbar = () => {
 
           <ul>
             {/* <li>
-              <Link to="/home">Home</Link>
+              <Link to="/ho
+              me">Home</Link>
             </li> */}
-            <li>
-              <Link to="/jobs">Jobs</Link>
-            </li>
-            <li>
-              <Link to="/post-job">Post Job</Link>
-            </li>
+            {userInfo.userType === "employee" && (
+              <li>
+                <Link to="/jobs">Applied Jobs</Link>
+              </li>
+            )}
+            {userInfo.userType === "manager" && (
+              <li>
+                <Link to="/post-job">Post Job</Link>
+              </li>
+            )}
             {/* <li>
               <Link to="/saved-job">Saved Job</Link>
             </li> */}

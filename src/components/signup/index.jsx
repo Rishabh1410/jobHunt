@@ -15,7 +15,7 @@ const Signup = () => {
     e.preventDefault();
     const data = {
       name: username,
-      password: pass
+      password: pass,
     };
 
     if (selectedOption === "manager") {
@@ -23,7 +23,10 @@ const Signup = () => {
         .post("http://localhost:8080/manager/signup", data)
         .then((response) => {
           console.log("Manager Signup successful:", response.data);
-          localStorage.setItem("token", response.data);
+          localStorage.setItem("token", {
+            userType: "manager",
+            id: response.data,
+          });
         })
         .catch((error) => {
           console.error("Manager signup failed:", error);
@@ -33,7 +36,10 @@ const Signup = () => {
         .post("http://localhost:8080/auth/signup", data)
         .then((response) => {
           console.log("Signup successful:", response.data);
-          localStorage.setItem("token", response.data);
+          localStorage.setItem("token", {
+            userType: "employee",
+            id: response.data,
+          });
         })
         .catch((error) => {
           console.error("signup failed:", error);
